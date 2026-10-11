@@ -5,7 +5,7 @@
  * in a top-level popup (first-party cookies). This handler is the ENTIRE popup
  * document — no React shell:
  *
- *   Phase 1 (`?providerId=\u2026`): start OAuth server-side and 302 straight to the
+ *   Phase 1 (`?providerId=…`): start OAuth server-side and 302 straight to the
  *     broker / upstream login page. The popup never paints the app.
  *   Phase 2 (`?done=1`): after the broker round-trip, emit a tiny HTML page that
  *     posts the session token to the opener and closes. No SPA hydrate, no
@@ -14,7 +14,7 @@
  * Wired automatically by the Vite `authPopupPlugin` in `vite.config.ts` during
  * `npm run dev` (live preview). Do NOT create `src/routes/auth/popup.tsx` — a
  * React route here paints the full app shell in the popup. The opener lives in
- * `client.ts` (`signIn` \u2192 `openSignInPopup`).
+ * `client.ts` (`signIn` → `openSignInPopup`).
  */
 import { auth, SESSION_TOKEN_COOKIE } from "./server";
 
@@ -132,7 +132,7 @@ function completionHtml(message: PopupMessage): string {
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Signing in\u2026</title>
+<title>Signing in…</title>
 <style>
   html,body{margin:0;min-height:100%;background:#0b0b0c;color:#a1a1aa;
     font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
@@ -140,7 +140,7 @@ function completionHtml(message: PopupMessage): string {
 </style>
 </head>
 <body>
-<main><p>Signing you in\u2026</p></main>
+<main><p>Signing you in…</p></main>
 <script type="application/json" id="grok-auth-popup-msg">${payload}</script>
 <script>
 (function () {
