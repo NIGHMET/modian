@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Noto Sans SC", "WenQuanYi Zen Hei", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "IBM Plex Mono", "WenQuanYi Zen Hei Mono", ui-monospace, monospace;
+
+  --color-bg: #141311;
+  --color-surface: #1c1b18;
+  --color-elevated: #26241f;
+  --color-stage: #0e0d0c;
+  --color-fg: #f3efe6;
+  --color-muted: #a39c90;
+  --color-subtle: #8a847a;
+  --color-border: #34312b;
+  --color-check-a: #2c2a26;
+  --color-check-b: #1a1916;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    height: 100%;
+  }
+
+  body {
+    height: 100%;
+    overflow: hidden;
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+
+  button:focus-visible,
+  input:focus-visible {
+    outline: 2px solid var(--color-fg);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pressable {
+    transition:
+      background-color 150ms cubic-bezier(0.22, 1, 0.36, 1),
+      color 150ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 150ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .pressable:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  .dialog-card {
+    animation: dialog-in 250ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.checker {
+  background-color: var(--color-check-b);
+  background-image: conic-gradient(
+    var(--color-check-a) 0 25%,
+    var(--color-check-b) 0 50%,
+    var(--color-check-a) 0 75%,
+    var(--color-check-b) 0 100%
+  );
+  outline: 1px solid var(--color-border);
+  touch-action: none;
+}
+
+.pixels {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.dock {
+  padding-bottom: max(env(safe-area-inset-bottom), 0px);
+}
+
+.swatch {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-fg) 18%, transparent);
+}
+
+.swatch[aria-checked="true"] {
+  box-shadow:
+    inset 0 0 0 2px var(--color-surface),
+    inset 0 0 0 4px var(--color-fg);
+}
