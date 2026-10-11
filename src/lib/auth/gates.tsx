@@ -60,7 +60,7 @@ export function SignInGate({
   const state = resolveSignInGateState({ isPending, hasUser: user !== null });
   if (state === "pending") return null;
   if (state === "signed_in") return <>{children}</>;
-  return <>{fallback ?? <SignInButtons />}></>;
+  return <>{fallback ?? <SignInButtons />}</>;
 }
 
 export function SignInButtons() {
