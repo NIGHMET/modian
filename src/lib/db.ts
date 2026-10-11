@@ -75,7 +75,7 @@ function toSql(run: Run): Sql {
     strings: TemplateStringsArray,
     ...values: unknown[]
   ): Promise<T[]> => {
-    // Rebuild with $1, $2, … placeholders so values stay parameterized.
+    // Rebuild with $1, $2, \u2026 placeholders so values stay parameterized.
     let text = strings[0];
     for (let i = 0; i < values.length; i += 1) text += `$${i + 1}${strings[i + 1]}`;
     return run<T>(text, values);
@@ -172,7 +172,7 @@ let sqlPromise: Promise<Sql> | null = null;
 async function createSql(): Promise<Sql> {
   if (typeof window !== "undefined") {
     throw new Error(
-      "@/lib/db is server-only — call getSql() from a createServerFn handler " +
+      "@/lib/db is server-only \u2014 call getSql() from a createServerFn handler " +
         "or a server route loader, never from client code.",
     );
   }
@@ -188,7 +188,7 @@ async function createSql(): Promise<Sql> {
  */
 export function getSql(): Promise<Sql> {
   sqlPromise ??= createSql().catch((err) => {
-    sqlPromise = null; // don't memoize failures — let the next call retry
+    sqlPromise = null; // don't memoize failures \u2014 let the next call retry
     throw err;
   });
   return sqlPromise;
