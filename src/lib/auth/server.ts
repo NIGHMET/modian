@@ -7,7 +7,7 @@
  * The app runs its own Better Auth at `/api/auth/*`, so the session cookie stays
  * on this app's own origin. Sign-in federates to the shared **Grok auth broker**
  * (`GROK_AUTH_ISSUER`) via the `genericOAuth` plugin — the broker brokers the
- * upstream sign-in methods (Google, X, \u2026) and holds their shared secrets; this
+ * upstream sign-in methods (Google, X, …) and holds their shared secrets; this
  * app only holds its own client id/secret and names the upstream it wants via
  * each provider's `idp` hint.
  *
@@ -107,7 +107,7 @@ const baseURL = explicitBaseURL ?? {
   // Include loopback hosts so dynamic baseURL resolves for local email/password
   // (not only the preview wildcard).
   allowedHosts: [...previewAllowedHosts, "localhost", "127.0.0.1", "[::1]"],
-  // `auto` \u2192 trust both http:// and https:// expansions of allowedHosts
+  // `auto` → trust both http:// and https:// expansions of allowedHosts
   // (preview is https; local dev is http).
   protocol: "auto" as const,
   fallback: "http://localhost:8080",
@@ -179,7 +179,7 @@ export const auth = betterAuth({
   secret: env("BETTER_AUTH_SECRET") ?? previewAuthSecret(),
   database,
 
-  // CSRF / origin check for credentialed auth POSTs (email sign-up/sign-in, \u2026).
+  // CSRF / origin check for credentialed auth POSTs (email sign-up/sign-in, …).
   // See `trustedOrigins` construction above — must cover live preview hosts AND
   // local loopback variants, or clients get "Invalid origin".
   trustedOrigins,
