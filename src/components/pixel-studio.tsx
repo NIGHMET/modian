@@ -178,7 +178,7 @@ export function PixelStudio() {
   function setHover(cell: { x: number; y: number } | null) {
     hoverRef.current = cell;
     if (coordRef.current) {
-      coordRef.current.textContent = cell ? `${cell.x}, ${cell.y}` : "—";
+      coordRef.current.textContent = cell ? `${cell.x}, ${cell.y}` : "\u2014";
     }
     drawOverlay();
   }
@@ -577,7 +577,7 @@ export function PixelStudio() {
             ref={coordRef}
             className="pointer-events-none absolute bottom-3 left-3 font-mono text-xs text-muted tabular-nums"
           >
-            —
+            \u2014
           </span>
         </div>
       </div>
